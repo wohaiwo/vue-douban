@@ -59,9 +59,9 @@ const NotFoundComponent = {
 
 // 定义路由
 const routes = [
-	{path: '/foo', component: resolve => require(['../App.vue'], resolve)},
+	{path: '/movie', name: 'movie', component: resolve => require(['../App.vue'], resolve)},
 	{path: '/bar', component: resolve => require(['../components/test-demo.vue'], resolve)},
-	{path: '/login', component: resolve => require(['../components/login.vue'], resolve)},
+	{path: '/book', component: resolve => require(['../components/login.vue'], resolve)},
 	{path: '/getpost', component: resolve => require(['../components/getPost.vue'], resolve)},
 	{path: '/douban', component: resolve => require(['../components/douban.vue'], resolve)},
 	// 动态路径参数 以冒号开头
@@ -87,7 +87,7 @@ const routes = [
 	// 命名路由，自定义路由名字
 	{path: '/bar', name: 'jay', component: testDemo},
 	// 设置路由中的别名
-	{path: '/alias', component: mainVue, alias: '/foo'},
+	{path: '/alias', component: mainVue, alias: '/movie'},
 	{
 		path: '/zhan',
 		components: {
@@ -98,6 +98,4 @@ const routes = [
 	},
 	{ path: '*', component: NotFoundComponent }
 ]
-
-
 export default routes;

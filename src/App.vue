@@ -1,20 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <v-header></v-header>
     <testDemo></testDemo>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import vHeader from './components/header'
 import testDemo from './components/test-demo'
 
-
 export default {
-  name: 'app',
   components: {
-    Hello, testDemo
+    testDemo, vHeader
   }
 }
 
@@ -27,6 +24,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

@@ -15,7 +15,7 @@ Vue.use(Vuex);			// 加载vuex插件
 
 
 // 创建 router 实例，然后传 `routes` 配置
-const router = new VueRouter({
+const router = new VueRouter({ 
 	mode: 'history',
 	routes,
 	scrollBehavior(to, from, savePostion) {
@@ -31,7 +31,10 @@ router.beforeEach((to, from, next) => {
 	next();
 });
 
-// 创建和挂载根实例
+// 首次加载自动跳转到movie页面上去
+router.push({name: 'movie'});
+// 创建和挂载根实例	
 var vm =  new Vue({
-	router
+	router,
+	components: { App}
 }).$mount('#app')

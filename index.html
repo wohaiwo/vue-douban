@@ -2,7 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>vue2搭建的框架</title>
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>vue-douban-project</title>
+    <link rel="stylesheet" href="./static/lib/css/reset.css">
     <style type="text/css">
     	.view {
     		width: 200px;
@@ -20,12 +22,11 @@
 			color: green;
 			font-size: 14px;
 		}
-
     </style>
   </head>
   <body>
     <div id="app">
-		<h2>vue-router</h2>
+<!-- 		<h2>vue-router</h2>
 		<p>
 			<router-link to="/foo">Foo</router-link>
 			<router-link to="/bar" tag="span">Bar</router-link>
@@ -37,13 +38,14 @@
 			<router-link to="/getpost">获取post信息</router-link>
 			<router-link to="/login">登录</router-link>
 			<router-link to="/douban">豆瓣读书排行榜</router-link>
-		</p>
-
+		</p> -->
+	
 		<!-- 路由出口 -->
-		<router-view></router-view>
+		<!-- <router-view></router-view> -->
 		<!-- 如果存在name属性，则component匹配的是子路由下面的components的模块 -->
-		<router-view class="view two" name="a"></router-view>
-		<router-view class="view three" name="b"></router-view>
+		<!-- <router-view class="view two" name="a"></router-view>
+		<router-view class="view three" name="b"></router-view> -->
+    	<router-view></router-view>
     </div>
 
     <!-- built files will be auto injected -->
