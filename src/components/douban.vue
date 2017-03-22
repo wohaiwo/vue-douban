@@ -1,6 +1,10 @@
 <style scoped lang="scss">
+	.movie {
+		position: relative;
+		margin-bottom: 20px;
+	}
 	.movieRank {
-		margin: 20px auto 40px;
+		margin: 20px auto 10px;
 		box-shadow: 0px 0px 1px solid #333;
 		list-style: none;
 		li {
@@ -36,7 +40,41 @@
 				}
 			}
 		}
+	}	
+	.addData > button:first-child {
+		margin-right: 10px;
 	}
+	.btn {
+		display: inline-block;
+		color: #fff;
+		background: #4db3ff;
+		border: 1px solid #bfcbd9;
+		white-space: nowrap;
+		cursor: pointer;
+		line-height: 1;
+		text-align: center;
+		font-size: 14px;
+		border-radius: 4px;
+		padding: 10px 15px;
+		margin: 0;
+		outline: none;
+		box-sizing: border-box;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		-webkit-appearance: none;
+	}
+	.btn:hover {
+		background: #4db3ff;
+		border-color: #4db3ff;
+		color: #fff;
+	}
+	.btn:active {
+		background: #1d90e6;
+		border-color: #1d90e6;
+		color: #fff;
+	}
+
 </style>
 
 <template>
@@ -44,9 +82,6 @@
 		<v-header></v-header>
 	    <div class="movie">
 			<h2>{{ message }}</h2>
-			<button @click="jsonp">jsonp</button>
-			<button @click="getPromise">promise</button>
-			<button @click="vueresoure">vueresoure</button>
 			<ul class="movieRank">
 				<li v-for="item in items">
 					<h3>{{ item.title }}&nbsp; {{ item.original_title }}<span>( {{ item.year }} )</span></h3>
@@ -62,6 +97,10 @@
 					</section>
 				</li>
 			</ul>
+			<div class="addData" v-show="isShow">
+				<button class="btn" v-show="isShowPrev" @click="addMore('prev')">上一页</button>
+				<button class="btn" @click="addMore('next')">下一页</button>
+			</div>
 	    </div>
 	    <loading :show="done"></loading>
 	</div>
@@ -74,15 +113,34 @@
 		data() {
 			return {
 				done: false,
+				isShowPrev: false,
+				isShow: false,
 				message: '',
+				start: 0,
 				items: []
 			}
 		},
 		components: {
 			vHeader, loading
 		},
-
+		mounted() {
+				// 页面初始化时加载数据
+				this.vueresoure();
+		},
 		methods: {
+			addMore(option = 'next') {
+				this.$data.isAdd = false;
+				if(option === 'prev') {
+					if(this.$data.start === 10) {
+						this.$data.isShowPrev = false;
+					}
+					this.$data.start -= 10;
+				} else {
+					this.$data.isShowPrev = true;
+					this.$data.start += 10;
+				}
+				this.vueresoure(this.$data.start);
+			},
 			jsonp() {
 				// 这里必须是一个window定义的全局函数 才能被调用
 				window.handleDate = response => { 
@@ -93,10 +151,6 @@
 				var script = document.createElement('script');
 				script.src = "https://api.douban.com/v2/movie/top250?count=10&callback=handleDate";
 				document.body.insertBefore(script, document.body.firstChild);
-				
-			    // 因为目标 URL 是一个后台脚本，访问后会被执行，返回的 JSON 被包裹在回调函数中以字符串的形式被返回。
-			    // 返回的字符串放入 <script> 中就成为了一个普通的函数调用，执行回调函数，返回的 JSON 数据作为实参被传给了回调函数。
-
 			},
 
 			getPromise() {
@@ -122,13 +176,13 @@
 				getJSON('https://api.douban.com/v2/movie/top250?count=10').then(function(json) {
 						console.log('result' + json);
 					}, function(error) {
-						console.error('出错了' + error);
+						console.error('访问失败' + error);
 					});
 			},
-
-			vueresoure() {
+			vueresoure(start = 0, count = 10) {
+				let movieTopUrl = `https://api.douban.com/v2/movie/top250?start=${start}&count=${count}`
 				this.$data.done = true;
-				this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
+				this.$http.jsonp(movieTopUrl, {}, {
 						headers: {
 
 						},
@@ -137,7 +191,8 @@
 				).then(function(response) {
 					this.$data.message = response.data.title;
 					this.$data.items = response.data.subjects;
-					this.$data.done = false;;
+					this.$data.done = false;
+					this.$data.isShow = true;
 				}, function(response) {
 					console.log('opps Is Error: ' + response);
 					this.$data.done = false;;

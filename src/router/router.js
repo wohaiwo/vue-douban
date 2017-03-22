@@ -1,4 +1,3 @@
-import testDemo from '../components/test-demo.vue';
 import mainVue from '../App.vue';
 
 
@@ -21,18 +20,15 @@ const UserPosts = {
 				</div>
 				`
 }
-
 const UserHome = {
 	template: '<div>这里是没有匹配的界面</div>'
 }
+
 
 const Foo = {
 	template: '<p style="color: red">hello world</p>'
 }
 
-const post = {
-	template: '<h3>匹配vue-router中输出的$route.params {{ $route }}</h3>'
-}
 
 const nameA = {
 	template: 	`
@@ -60,10 +56,9 @@ const NotFoundComponent = {
 // 定义路由
 const routes = [
 	{path: '/movie', name: 'movie', component: resolve => require(['../App.vue'], resolve)},
-	{path: '/bar', component: resolve => require(['../components/test-demo.vue'], resolve)},
-	{path: '/book', component: resolve => require(['../components/login.vue'], resolve)},
 	{path: '/getpost', component: resolve => require(['../components/getPost.vue'], resolve)},
 	{path: '/douban', component: resolve => require(['../components/douban.vue'], resolve)},
+	{path: '/movie/search', component: resolve => require(['../components/movieSearch.vue'], resolve)},
 	// 动态路径参数 以冒号开头
 	{path: '/user/:id', component: user,
 		children: [
@@ -81,11 +76,8 @@ const routes = [
 			}
 		]
 	},
-	{path: '/blog/:id/title/:posts', component: post},
 	// 重定向路由
 	{path: '/redirect', redirect: '/user/重定向/posts'},
-	// 命名路由，自定义路由名字
-	{path: '/bar', name: 'jay', component: testDemo},
 	// 设置路由中的别名
 	{path: '/alias', component: mainVue, alias: '/movie'},
 	{

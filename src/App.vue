@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <v-header></v-header>
-    <testDemo></testDemo>
+    <v-search></v-search>
   </div>
 </template>
 
 <script>
 import vHeader from './components/header'
-import testDemo from './components/test-demo'
+import vSearch from './components/movieSearch.vue'
 
 export default {
   components: {
-    testDemo, vHeader
-  }
+   vHeader,  vSearch
+  } 
 }
 
 </script>
