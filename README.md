@@ -1,24 +1,34 @@
-# vue2-project
+## 项目介绍
 
-> A Vue.js project
+这是一个基于vue, vue-router, vue-resource, express来实现的简单的电影网站，后台调用的是豆瓣电影api接口
+- [豆瓣v2-api](https://developers.douban.com/wiki/?title=movie_v2#review)
+- [电影评论api接口](https://api.douban.com/v2/movie/subject/${this.id}/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=20&client=something&udid=dddddddddddddddddddddd)  由于豆瓣影评接口需要开发者注册，所有便到网上找了一个别人注册好的
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+## 运行项目
 
-# build for production with minification
-npm run build
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+- 克隆整个项目到本地
+```
+clone https://github.com/wohaiwo/vue-douban.git
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+- 进入项目中，并安装依赖
+```
+npm install
+```
+
+- 打开浏览器，输入**127.0.0.1:8080**
+```
+npm run dev
+```
+
+## 项目截图
+![电影网站截图](../douban.gif)
+
+## 代做事项
+
+- 每次F5重新加载页面时，会出现static文件下的reset.css无法加载的情况
+- 各个组件中的api并没有完全分离，需要抽离出一个api.js
+- 页面基本样式优化
+- 添加本地存储，防止多次加载相同数据
