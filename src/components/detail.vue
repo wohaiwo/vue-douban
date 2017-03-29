@@ -1,4 +1,4 @@
-<style  scoped  lang="scss">
+<style scoped lang="scss">
   .detail {
     text-align: left;
     .goback  {
@@ -61,7 +61,10 @@
     </section>
     <section class="summary">
       <h4>剧情介绍</h4>
-      <p>{{ movieDetail.summary }}</p>  
+      <p>{{ movieDetail.summary }}</p>
+    </section>
+    <section>
+      <v-review :id="movieId" :show="isShow"></v-review>
     </section>
   </div>
   <loading :show="done"></loading>
@@ -70,16 +73,18 @@
 
 <script>
   import loading from './loading.vue';
+  import vReview from './reviews.vue';
   export default {
     data() {
       return {
         done: false,
-        isShow: false,
-        movieDetail: {}
+        isShow: false,     // 只有当数据加载完成之后才能够实现出来
+        movieId: this.$route.params.id,
+        movieDetail: {}    // 电影详情信息
       }
     },
     components: {
-      loading
+      loading, vReview
     },
     mounted() {
       this.getMovieDetail();
@@ -90,8 +95,7 @@
       },
       getMovieDetail() {
         this.$data.done = true;
-        let movieId = this.$route.params.id;
-        let movieDetailUrl = `https://api.douban.com/v2/movie/subject/${movieId}`;
+        let movieDetailUrl = `https://api.douban.com/v2/movie/subject/${this.movieId}`;
         this.$http.jsonp(movieDetailUrl).then(function(response) {
           this.done = false;
           this.isShow = true;

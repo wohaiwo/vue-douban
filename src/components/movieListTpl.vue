@@ -65,11 +65,11 @@
 						<section>
 							<img v-bind:src="item.images.small" v-bind:alt="item.title">
 							<aside>
-								<p>导演:<a v-for="(director, index) in item.directors" :href="director.alt">{{ director.name }} {{ index == (item.directors.length - 1) ? '' : '/' }}</a>
+								<p>导演:&nbsp;&nbsp;<a v-for="(director, index) in item.directors" :href="director.alt">{{ director.name }} {{ index == (item.directors.length - 1) ? '' : '/' }}</a>
 								</p>
-								<p>主演:<a v-for="(cast, index) in item.casts" :href="cast.alt">{{ cast.name }} {{ index == (item.casts.length - 1) ? '' : '/ ' }}</a></p>
-								<p>类型:<span v-for="(genre, index) in item.genres">{{ genre }} {{ index == (item.genres.length - 1) ? '' : '/' }}</span></p>
-								<p>豆瓣评分:<span>{{ item.rating.average }}</span></p>
+								<p>主演:&nbsp;&nbsp;<a v-for="(cast, index) in item.casts" :href="cast.alt">{{ cast.name }} {{ index == (item.casts.length - 1) ? '' : '/ ' }}</a></p>
+								<p>类型:&nbsp;&nbsp;<span v-for="(genre, index) in item.genres">{{ genre }} {{ index == (item.genres.length - 1) ? '' : '/' }}</span></p>
+								<p>豆瓣评分:&nbsp;&nbsp;<span>{{ item.rating.average }}分</span></p>
 							</aside>
 						</section>
 					</router-link>
