@@ -8,7 +8,6 @@ import Vuex from 'vuex';
 import routes from './router/router.js';
 
 
-// let testDemo = require('./components/test-demo.vue');
 Vue.use(VueRouter);		// 加载vue-router插件
 Vue.use(VueResource);
 Vue.use(Vuex);			// 加载vuex插件
@@ -21,14 +20,6 @@ const router = new VueRouter({
 	scrollBehavior(to, from, savePostion) {
 		return savePostion ? savePostion : {x: 0, y: 300};
 	}
-});
-// to 表示将要进入的目标路由
-// from 当前导航正要离开的路由
-router.beforeEach((to, from, next) => {
-	console.log('开始执行beforeEach路由');
-	console.log(to);
-	console.log(from);
-	next();
 });
 
 // 首次加载自动跳转到movie页面上去
