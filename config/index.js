@@ -23,7 +23,15 @@ module.exports = {
     port: 8080,                        // 运行测试页面的端口
     assetsSubDirectory: 'static',    // 编译输出的二级目录
     assetsPublicPath: '/',           // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
-    proxyTable: {},                  // 需要 proxyTable 代理的接口（可跨域）
+    proxyTable: {                    // 需要 proxyTable 代理的接口（可跨域）
+      '/douban': {                   //  以'/douban' 开头的接口，全部转发到'https://api.douban/v2'这个域名下面
+      target: 'https://api.douban.com/v2',   // this.$http.get('douban/movie/in_theaters') 经过转发，实际的请求地址是'
+      changeOrigin: true,                    // https://api.douban/v2/movie/in_theaters 就可以解决跨越问题了
+      pathRewrite: {
+        '^/douban': '/'
+        }
+      }
+    },                 
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
